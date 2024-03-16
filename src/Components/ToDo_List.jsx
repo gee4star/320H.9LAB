@@ -1,24 +1,16 @@
 import React, {useState} from 'react';
 
-const initialListItems = [
+export const initialListItems = [
      "Do this first"
 ]
 
+    
 
 function ToDo_List() {
-    
     const [todos, createTodos] = useState(initialListItems);
-    // const addItem = obj => {
-    //     setTodos(current => [...current, obj]);
-    //   };
-    // const input = document.getElementById("input")  
 
-    //   function addItems() {
-        //                 setTodos([
-        //       ...todos,
-        //       { id: ids++, name: name }
-        //     ]);
-        //   }
+    // Adapted from a PlainEnglish blog: https://plainenglish.io/blog/how-to-push-or-append-an-element-to-a-state-array-with-react-hooks-32e75c090040
+   
     return(
     <div>
         <div>
@@ -26,34 +18,20 @@ function ToDo_List() {
                 type="text"
                 aria-label="Field name"
                 id="input"
-                // onChange={}
-                // value={value}
-                // onChange={onChange}
             />
-              {/* const handleAdd = (todo) => {
-                const newTodos = todos.slice();
-                newTodos.push(todo);
-                setTodos(newTodos);
-                } */}
+              
             <button 
                 onClick={() => 
                     createTodos((array) => array.concat(document.getElementById("input").value))}
-                //     addItem({
-                //       id: Math.random(),
-                //       name: input
-                //     })
-                //   }
             >create</button>
-            {todos.map((a, i) => (
-          <p key={i}>{a}</p>
+            {todos.map((item, i) => (
+          <p key={i}>  <input type="checkbox" style={{textDecoration: "line-through"}}/>{item }<button>edit</button>
+          <button onClick={() => 
+          createTodos((todos) => todos.filter((_, index) => index !== i))
+          }
+          >delete</button></p>
         ))}
-           
-
-
-
-            <input type="checkbox"/>
-            <button>edit</button>
-            <button>delete</button>
+            
         </div>
     </div>
     )
